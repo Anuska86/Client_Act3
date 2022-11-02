@@ -1,17 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <script src="actividad03.js"></script>
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <h3>Extras Disponibles</h3>
-    <script>document.write(mostrarExtras())</script>
+    <script>
+      document.write(mostrarExtras());
+    </script>
     <h3>Coches Disponibles</h3>
-    <script>document.write(mostrarCoches())</script>
-</body>
+    <script>
+      document.write(mostrarCoches());
+    </script>
+
+    <h2>Gestiona Extras</h2>
+
+    <input type="text" id="price" name="price" /><br />
+
+    <select id="images" name="images">
+      <option value="banana">Banana</option>
+      <option value="wheels">Wheels</option>
+    </select>
+    <button onclick="addExtras()">Añadir extra</button>
+
+    <h2>Borrar Extras</h2>
+    <label>Posición a borrar del array</label>
+    <input type="number" id="number" name="number" /><br />
+
+    <button onclick="deleteExtras()">Borrar extra</button>
+
+    <h2>Crea un coche disponible</h2>
+
+    <input type="name" id="name" name="name" />Marca<br />
+    <input type="number" id="velocity" name="velocity" />Km/h<br /><br />
+    <button onclick="addCar()">Añadir coche</button>
+
+    <h2>Asigna un extra a un coche</h2>
+    <label>Extra:</label>
+    <select id="extra" name="extra">
+      <option value="0">0</option>
+      <option value="1">1</option>
+    </select>
+    <label>Nombre del coche:</label>
+    <select id="carName" name="carName">
+      <option value="Tesla">Tesla</option>
+      <option value="Volvo">Volvo</option>
+    </select>
+
+    <button onclick="addExtratoCar()">Añadir un extra al coche</button>
+  </body>
 </html>
