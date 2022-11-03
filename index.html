@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <script src="actividad03.js"></script>
     <title>Document</title>
@@ -13,10 +14,12 @@
     <script>
       document.write(mostrarExtras());
     </script>
+    <span id="extrasPrueba"></span>
     <h3>Coches Disponibles</h3>
     <script>
       document.write(mostrarCoches());
     </script>
+    <span id="carsPrueba"></span>
 
     <h2>Gestiona Extras</h2>
 
@@ -41,16 +44,9 @@
     <button onclick="addCar()">Añadir coche</button>
 
     <h2>Asigna un extra a un coche</h2>
-    <label>Extra:</label>
-    <select id="extra" name="extra">
-      <option value="0">0</option>
-      <option value="1">1</option>
-    </select>
-    <label>Nombre del coche:</label>
-    <select id="carName" name="carName">
-      <option value="Tesla">Tesla</option>
-      <option value="Volvo">Volvo</option>
-    </select>
+    <script>
+      document.write(assignExtraToCar());
+    </script>
 
     <button onclick="addExtratoCar()">Añadir un extra al coche</button>
   </body>
