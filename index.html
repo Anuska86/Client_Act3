@@ -14,12 +14,10 @@
     <script>
       document.write(mostrarExtras());
     </script>
-    <span id="extrasPrueba"></span>
     <h3>Coches Disponibles</h3>
     <script>
       document.write(mostrarCoches());
     </script>
-    <span id="carsPrueba"></span>
 
     <h2>Gestiona Extras</h2>
 
@@ -44,10 +42,11 @@
     <button onclick="addCar()">Añadir coche</button>
 
     <h2>Asigna un extra a un coche</h2>
-    <script>
-      document.write(assignExtraToCar());
-    </script>
-
+    <div id="carDiv">
+      <script>
+        document.write(assignExtraToCar());
+      </script>
+    </div>
     <button onclick="addExtratoCar()">Añadir un extra al coche</button>
   </body>
 </html>

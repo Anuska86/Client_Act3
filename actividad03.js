@@ -32,7 +32,7 @@ class Coche {
     this.extras.push(extra);
   }
   getHTML() {
-    let stringIni = `<span>${this.name} ${this.speed} [`;
+    let stringIni = `<span>${this.name} ${this.speed}km/h [`;
     let stringMid = "";
     for (let i = 0; i < this.extras.length; i++) {
       stringMid += this.extras[i].getHTML() + " ";
@@ -47,24 +47,24 @@ let extraDisponibles = [extra, extra2];
 
 let coche = new Coche();
 coche.name = "Tesla";
-coche.speed = "450km/h";
+coche.speed = "450";
 coche.addExtra(extra);
 coche.addExtra(extra2);
 console.log(coche.getHTML());
 
 let coche2 = new Coche();
 coche2.name = "Volvo";
-coche2.speed = "350km/h";
+coche2.speed = "350";
 coche2.addExtra(extra);
 coche2.addExtra(extra2);
 console.log(coche2.getHTML());
 
 function mostrarExtras() {
-  let result = "";
+  let result = '<span id="extrasPrueba">';
   for (let i = 0; i < extraDisponibles.length; i++) {
-    result += extraDisponibles[i].getHTML() + " ";
+    result += `<span id="extraDisponibles${i}">`+extraDisponibles[i].getHTML() + "</span> ";
   }
-  return result;
+  return result+"</span>";
 }
 
 let cochesDisponibles = new Array();
@@ -73,7 +73,8 @@ cochesDisponibles[coche2.name] = coche2;
 console.log(cochesDisponibles);
 
 function assignExtraToCar() {
-  let stringIni = '<label>Extra:</label><select id="extra" name="extra">';
+  const node = document.createElement("div");
+  let stringIni = '<div id="carForm"><label>Extra:</label><select id="extra" name="extra">';
   for (let i = 0; i < extraDisponibles.length; i++) {
     stringIni += `<option value="${i}">${i}</option>`;
   }
@@ -85,17 +86,20 @@ function assignExtraToCar() {
     let name = cochesDisponibles[keys[i]].name;
     stringIni += `<option value="${name}">${name}</option>`;
   }
-  stringIni += "</select>";
-  return stringIni;
+  stringIni += "</select></div>";
+  node.innerHTML=stringIni;
+  document.getElementById("carDiv").appendChild(node);
+  //return stringIni;
+  //carDiv
 }
 
 function mostrarCoches() {
-  let result = "";
+  let result = '<span id="carsPrueba">';
   let keys = Object.keys(cochesDisponibles);
   for (let i = 0; i < keys.length; i++) {
     result += cochesDisponibles[keys[i]].getHTML() + " ";
   }
-  return result;
+  return result+'</span>';
 }
 
 function addExtras() {
@@ -113,6 +117,8 @@ function addExtras() {
   span.appendChild(node);
   document.getElementById("extrasPrueba").appendChild(span);
   console.log(extraDisponibles);
+  $("#carForm").remove();
+  assignExtraToCar();
 }
 
 function addCar() {
@@ -122,24 +128,25 @@ function addCar() {
 
   cochesDisponibles[coche.name] = coche;
   const spanCar =  document.createElement("span");
-  spanCar.innerHTML = coche.name+ " " + coche.speed+ " [ ]";
+  spanCar.innerHTML = coche.name+ " " + coche.speed+ "km/h [ ]";
   document.getElementById("carsPrueba").appendChild(spanCar);
   console.log(cochesDisponibles);
+  $("#carForm").remove();
+  assignExtraToCar();
 }
 
 function deleteExtras() {
   let choosenNumber = document.getElementById("number").value;
 
   if (choosenNumber <= extraDisponibles.length) {
+    let extra = "#extraDisponibles"+choosenNumber;
+    $(extra).remove();
     extraDisponibles.splice(choosenNumber, 1);
     mostrarExtras();
-    alert("Elemento borrado");
+    setTimeout(alert("Elemento borrado"), 1000);
   } else {
     alert("La posición elegida no existe en el array");
   }
-
-  //$("#extrasPrueba").children().slice(0).detach();
-  //https://stackoverflow.com/questions/3400135/removing-children-elements-given-an-index
 }
 
 function addExtratoCar() {
