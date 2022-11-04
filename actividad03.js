@@ -62,7 +62,7 @@ console.log(coche2.getHTML());
 function mostrarExtras() {
   let result = '<span id="extrasPrueba">';
   for (let i = 0; i < extraDisponibles.length; i++) {
-    result += `<span id="extraDisponibles${i}">`+extraDisponibles[i].getHTML() + "</span> ";
+    result += `<span class="extraDisponibles">`+extraDisponibles[i].getHTML() + "</span> ";
   }
   return result+"</span>";
 }
@@ -96,7 +96,7 @@ function mostrarCoches() {
   let result = '<span id="carsPrueba">';
   let keys = Object.keys(cochesDisponibles);
   for (let i = 0; i < keys.length; i++) {
-    result += `<span id="cochesDisponibles${i}">`+cochesDisponibles[keys[i]].getHTML() + "</span> ";
+    result += `<span class="cochesDisponibles">`+cochesDisponibles[keys[i]].getHTML() + "</span> ";
   }
   return result+'</span>';
 }
@@ -108,8 +108,9 @@ function addExtras() {
 
   extraDisponibles.push(extra);
   const span = document.createElement("span");
+  span.className ="extraDisponibles"
   const node = document.createElement("img");
-  node.class="image";
+  node.className ="image";
   node.src = extra.url;
   node.style = "  padding: 5px;width: 150px;height: 150px;"
   span.innerHTML = extra.price;
@@ -127,6 +128,7 @@ function addCar() {
 
   cochesDisponibles[coche.name] = coche;
   const spanCar =  document.createElement("span");
+  spanCar.className="cochesDisponibles";
   spanCar.innerHTML = coche.name+ " " + coche.speed+ "km/h [ ]";
   document.getElementById("carsPrueba").appendChild(spanCar);
   console.log(cochesDisponibles);
@@ -135,11 +137,10 @@ function addCar() {
 }
 
 function deleteExtras() {
-  let choosenNumber = document.getElementById("number").value;
+  let choosenNumber = parseInt(document.getElementById("number").value);
 
   if (choosenNumber <= extraDisponibles.length) {
-    let extra = "#extraDisponibles"+choosenNumber;
-    $(extra).remove();
+    $(".extraDisponibles")[choosenNumber].remove();
     extraDisponibles.splice(choosenNumber, 1);
     mostrarExtras();
     setTimeout(alert("Elemento borrado"), 1000);
@@ -165,7 +166,7 @@ function addExtratoCar() {
     }
   }
 
-  $("#cochesDisponibles"+carPosition).remove();
+  $(".cochesDisponibles")[carPosition].remove();
 
   let coche = new Coche();
   coche.name = carObject.name;
@@ -173,6 +174,7 @@ function addExtratoCar() {
 
   cochesDisponibles[coche.name] = coche;
   const spanCar =  document.createElement("span");
+  spanCar.className="cochesDisponibles";
   spanCar.innerHTML = coche.name+ " " + coche.speed+ "km/h [ ";
 
   let stringMid = "";
