@@ -90,14 +90,13 @@ function assignExtraToCar() {
   node.innerHTML=stringIni;
   document.getElementById("carDiv").appendChild(node);
   //return stringIni;
-  //carDiv
 }
 
 function mostrarCoches() {
   let result = '<span id="carsPrueba">';
   let keys = Object.keys(cochesDisponibles);
   for (let i = 0; i < keys.length; i++) {
-    result += cochesDisponibles[keys[i]].getHTML() + " ";
+    result += `<span id="cochesDisponibles${i}">`+cochesDisponibles[keys[i]].getHTML() + "</span> ";
   }
   return result+'</span>';
 }
@@ -157,4 +156,35 @@ function addExtratoCar() {
   let carObject = cochesDisponibles[choosenCar];
 
   carObject.extras.push(extraObject);
+
+  let keys = Object.keys(cochesDisponibles);
+  let carPosition = 0;
+  for (let i = 0; i < keys.length; i++) {
+    if(choosenCar == keys[i]){
+      carPosition = i;
+    }
+  }
+
+  $("#cochesDisponibles"+carPosition).remove();
+
+  let coche = new Coche();
+  coche.name = carObject.name;
+  coche.speed = carObject.speed;
+
+  cochesDisponibles[coche.name] = coche;
+  const spanCar =  document.createElement("span");
+  spanCar.innerHTML = coche.name+ " " + coche.speed+ "km/h [ ";
+
+  let stringMid = "";
+  for (let i = 0; i < carObject.extras.length; i++) {
+    stringMid += carObject.extras[i].getHTML() + " ";
+  }
+  let stringEnd = `]</span><br/>`;
+  let returnString = [stringMid, stringEnd].join(" ");
+
+  spanCar.innerHTML += returnString;
+  document.getElementById("carsPrueba").appendChild(spanCar);
+  console.log(cochesDisponibles);
+  $("#carForm").remove();
+  assignExtraToCar();
 }
